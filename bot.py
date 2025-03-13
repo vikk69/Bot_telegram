@@ -2,6 +2,7 @@ import os
 import logging
 import asyncio
 from aiogram import Bot, Dispatcher, Router, types
+from aiogram.filters import Command
 
 TOKEN = os.getenv("BOT_TOKEN")
 
@@ -11,11 +12,11 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 router = Router()
 
-@router.message(commands=['start'])
+@router.message(Command("start"))
 async def start_command(message: types.Message):
     await message.answer("Привет! Я бот для покупки фото.")
 
-@router.message(commands=['buy_photo'])
+@router.message(Command("buy_photo"))
 async def buy_photo(message: types.Message):
     await message.answer("Выбери фото для покупки.")
 
