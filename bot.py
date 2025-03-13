@@ -1,10 +1,10 @@
 import os
 import logging
 import asyncio
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 
 # Загружаем токен из переменных окружения
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = os.environ.get("BOT_TOKEN")
 
 # Настраиваем логирование
 logging.basicConfig(level=logging.INFO)
