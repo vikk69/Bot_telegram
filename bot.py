@@ -6,6 +6,9 @@ from aiogram.filters import Command
 
 TOKEN = os.getenv("BOT_TOKEN")
 
+if not TOKEN:
+    raise ValueError("Переменная окружения BOT_TOKEN не задана!")
+
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
@@ -22,7 +25,10 @@ async def buy_photo(message: types.Message):
 
 async def main():
     dp.include_router(router)
-    await dp.start_polling(bot)
+    try:
+        await dp.start_polling(bot)
+    finally:
+        await bot.session.close()
 
 if __name__ == "__main__":
     asyncio.run(main())
